@@ -1,0 +1,24 @@
+{
+    "name": "sicet7/gcm",
+    "description": "Package for encrypting strings with AES256-GCM",
+    "type": "library",
+    "require": {
+        "phpseclib/phpseclib": "~3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Sicet7\\GCM\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Martin René Sørensen",
+            "email": "git@sicet7.com"
+        }
+    ],
+    "minimum-stability": "stable"
+}
