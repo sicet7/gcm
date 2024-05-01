@@ -20,7 +20,7 @@ final class Encryptor
     public static function encrypt(
         string $plainText,
         string $key,
-        EncryptionVersion $version
+        EncryptionVersion $version = EncryptionVersion::V2
     ): string {
         try {
             $nonce = Random::string(12);
