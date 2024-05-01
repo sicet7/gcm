@@ -38,7 +38,7 @@ final class Encryptor
                     self::b64Encode($encoder->getTag());
             }
 
-            return ($version !== EncryptionVersion::V1 ? $version->value . '$' : '') . self::b64Encode($completeString);
+            return self::b64Encode($completeString);
         } catch (\Throwable $throwable) {
             throw new EncryptionException('Failed to encrypt plainText.', $throwable->getCode(), $throwable);
         }
@@ -73,23 +73,20 @@ final class Encryptor
      */
     public static function decode(string $cipherText): DecodedCipher
     {
-        $version = self::readVersion($cipherText);
         $parts = \explode('$', $cipherText);
-        if (empty($parts)) {
-            throw new DecodingException('Failed to decode cipherText at the version number.');
-        }
-        $cipherTextWithoutVersion = self::b64Decode($parts[\array_key_last($parts)]);
+        $cipherText = self::b64Decode($parts[\array_key_last($parts)]);
+        $version = self::readVersion($cipherText);
         if ($version === EncryptionVersion::V2) {
             return new DecodedCipher(
                 $version,
-                \substr($cipherTextWithoutVersion, 0, 12),
-                \substr($cipherTextWithoutVersion, 12, -16),
-                \substr($cipherTextWithoutVersion, -16)
+                \substr($cipherText, 0, 12),
+                \substr($cipherText, 12, -16),
+                \substr($cipherText, -16)
             );
         } else {
             if (
-                \substr_count($cipherTextWithoutVersion, '.') != 2 ||
-                \count(($parts = \explode('.', $cipherTextWithoutVersion))) != 3
+                \substr_count($cipherText, '.') != 2 ||
+                \count(($parts = \explode('.', $cipherText))) != 3
             ) {
                 throw new DecodingException('Failed to decode cipherText part string validation.');
             }
@@ -141,12 +138,9 @@ final class Encryptor
      */
     private static function readVersion(string $cipherText): EncryptionVersion
     {
-        if (\preg_match('/^(\d+)\\$([\w-]+)$/', $cipherText,$matches) === 1) {
-            return match ($matches[1]) {
-                '2' => EncryptionVersion::V2,
-                default => EncryptionVersion::V1,
-            };
+        if (\preg_match('/^([\w-]+)\\.([\w-]+)\\.([\w-]+)$/', $cipherText) === 1) {
+            return EncryptionVersion::V1;
         }
-        return EncryptionVersion::V1;
+        return EncryptionVersion::V2;
     }
 }
