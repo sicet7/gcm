@@ -19,8 +19,8 @@ final class EncryptorTest extends BaseTestCase
     public const TEST_KEY = '4743fa49fe0a4913aecacab1d200ab87';
     public const TEST_PLAINTEXT = 'The quick brown fox jumps over the lazy dog';
     public const TEST_V1_CIPHERTEXT = 'QTVxc3poRlBmTkw4QkFIbi5CckNWMjRQWXJGNnlnMkMyZk9WY0RfeUlMMU5SME5nQ0lLUjBISGRiTTRpc2xTQ3phMXZ1RWxhYW9nLkZwY3I4dGlVN0tfTzZyYUwtd0w5YVE';
-    public const TEST_V2_CIPHERTEXT = '2$90VVp8oCtWC6H5X7cXf6Jp7vmupNqlfBuf1lLsSrdYgXeNhigdMPstbaPpWU7QOacuvXMxIe7EszPJO2EAflSB955yeda84';
-    public const TEST_V2_CIPHERTEXT_OLD = '90VVp8oCtWC6H5X7cXf6Jp7vmupNqlfBuf1lLsSrdYgXeNhigdMPstbaPpWU7QOacuvXMxIe7EszPJO2EAflSB955yeda84';
+    public const TEST_V2_CIPHERTEXT_OLD = '2$90VVp8oCtWC6H5X7cXf6Jp7vmupNqlfBuf1lLsSrdYgXeNhigdMPstbaPpWU7QOacuvXMxIe7EszPJO2EAflSB955yeda84';
+    public const TEST_V2_CIPHERTEXT = '90VVp8oCtWC6H5X7cXf6Jp7vmupNqlfBuf1lLsSrdYgXeNhigdMPstbaPpWU7QOacuvXMxIe7EszPJO2EAflSB955yeda84';
 
     /**
      * @return void
